@@ -12,11 +12,37 @@
 
 
         //METODOS
+        
         public function conectarBD(){
 
-            $datosGeneralesBD="mysql:host=localhost;dbname=tiendasarmonia";
-            
+            try{
+                $datosGeneralesBD="mysql:host=localhost;dbname=tiendasarmonia";
+                $conexion= new PDO($datosGeneralesBD,$this->usuarioBD,$this->passwordBD);
+                return($conexion);
+            }catch(PDOException $mensajeError){
+                echo($mensajeError->getMessage());
 
+            }
+            
+        }
+
+        public function agregarRegistros($consultaSQL){
+
+            //1. Conectarme a la base datos
+            $conexion=$this->conectarBD();
+
+            //2. Decirle a la BD que se prepare porque le voy a enviar una consulta SQL
+            $operacion=$conexion->prepare($consultaSQL);
+
+            //3. Ejecutar la consulta
+            $resultado=$operacion->execute();
+
+            //4. Verificar el estado de la variable resultado
+            if($resultado){
+                echo("exito agregando los datos a la BD");
+            }else{
+                print_r($operacion->errorInfo());
+            }   
         }
         
     }

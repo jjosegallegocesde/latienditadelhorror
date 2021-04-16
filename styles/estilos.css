@@ -1,3 +1,65 @@
+#cortina1{
+    background-image: url("../img/imagen1.PNG");
+    padding: 70% 5% 0 5%;
+    position:relative;
+    z-index:1; 
+    background-size: cover;
+}
+
+#cortina1::after{
+    content: '';
+    position:absolute;
+    background-color: black;
+    bottom:0px;
+    left:0px;
+    opacity:0.55;
+    z-index:-1;
+    height: 30%;
+    width: 100%;
+}
+
+#cortina2{
+    background-image: url("../img/imagen2.PNG");
+    padding: 70% 5% 0 5%;
+    position:relative;
+    z-index:1; 
+    background-size: cover;
+}
+
+#cortina2::after{
+    content: '';
+    position:absolute;
+    background-color: black;
+    bottom:0px;
+    left:0px;
+    opacity:0.55;
+    z-index:-1;
+    height: 30%;
+    width: 100%;
+}
+
+#cortina3{
+    background-image: url("../img/imagen3.PNG");
+    padding: 70% 5% 0 5%;
+    position:relative;
+    z-index:1; 
+    background-size: cover;
+}
+
+#cortina3::after{
+    content: '';
+    position:absolute;
+    background-color: black;
+    bottom:0px;
+    left:0px;
+    opacity:0.55;
+    z-index:-1;
+    height: 30%;
+    width: 100%;
+}
+
+
+
 
 #banner{
 
@@ -31,6 +93,23 @@
     background-color:transparent !important;
 }
 
+
+
+.fuente{
+    font-family: 'Tangerine', cursive;
+    font-size:3.5rem;
+}
+
+.fuente2{
+    font-family: 'Tangerine', cursive;
+    font-size:2.5rem;
+}
+
+
+
+
+
+
 .zoom{
     overflow: hidden;
 }
@@ -50,4 +129,12 @@
 
 .fondoIcono{
     color:black;
+}
+
+.fondo2{
+    background-color: #3D3F40;
+}
+
+.fondo3{
+    background-color: #11462C;
 }
