@@ -10,13 +10,18 @@
         $nombreProducto=$_POST["nombreProducto"];
         $precioProducto=$_POST["precioProducto"];
         $marcaProducto=$_POST["marcaProducto"];
-
+        $fotoProducto=$_POST["fotoProducto"];
+        $descripcionProducto=$_POST["descripcionProducto"];
+       
         //2.Crear un objeto(sacarle copia  a la clase) de la clase BaseDatos
         //TODOS LOS OBJETOS SON VARIABLES
         $operacionBD= new Basedatos();
 
-        //3.Utilizar el metodo deseado para establecer la conexión
-        $operacionBD->conectarBD();
+        //3.Definir la consulta SQL a ejecutar
+        $consultaSQL="INSERT INTO productos(nombre,precio,marca,url_foto,descripcion) VALUES ('$nombreProducto','$precioProducto','$marcaProducto','$fotoProducto','$descripcionProducto')";
+        
+        //4. Llamar al metodo de la clase BaseDatos para AGREGAR rgeistros
+        $operacionBD->agregarRegistros($consultaSQL);
 
 
     }else{

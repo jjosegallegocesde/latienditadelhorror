@@ -4,11 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>registrar</title>
+    <title>Tiendita del horror</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 </head>
-<body class="bg-dark text-white">
+<body class="bg-dark">
+
+    <?php 
+
+        //0. INCLUIR EL ARCHIVO DONDE ESTA PROGRAMADA NUESTRA CLASE BASEDATOS
+        include("servidor/Basedatos.php");
+
+        //1. Crear una copia (crear un objeto) de la clase BD
+        $operacionBD= new Basedatos();
+
+        //2. consulta SQL para seleccionar
+        $consultaSQL="SELECT * FROM productos";
+
+        //3. accedemos al metodo buscarRegistros y almacenamos la consulta dentro de un arrgelo
+        $productos=$operacionBD->buscarRegistros($consultaSQL);
+
+        //4. imprimir el arreglo
+        /*print_r($productos);
+        $productos[0];*/
+       
     
+    ?>
+
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
@@ -50,55 +71,45 @@
         
     </header>
 
-    <main>
+    <main class="mt-5">
+    
+        <div class="container-fluid">
 
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-12 col-md-4">
-                    <h2>REGISTRO DE PRODUCTOS</h2>
-                    <form class="mt-5" method="POST" action="servidor/recibirDatos.php">
-                        
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Nombre Producto" name="nombreProducto">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Marca" name="marcaProducto">
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col">
-                                <input type="number" class="form-control" placeholder="Precio" name="precioProducto">
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="foto url" name="fotoProducto">
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col">
-                                <textarea class="form-control" placeholder="Descripción Producto" name="descripcionProducto"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-info btn-block mt-3" name="botonRegistro">registrar</button>
-                        </div>
-
-                        
-                        
-                    </form>
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="text-center text-white">PRODUCTOS DE LA TIENDA</h1>
                 </div>
             </div>
+            
+            <div class="row row-cols-1 row-cols-md-4 g-4 mt-5">
+                <?php foreach($productos as $producto):?>
+                    
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="<?= $producto["url_foto"] ?>" class="card-img-top" alt="imagen">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $producto["nombre"] ?>-<?=$producto["marca"]?></h5>
+                                <p><?= $producto["descripcion"]?></p>
+                                <p class="text-danger fw-bold">$<?= $producto["precio"]?></p>
+                                <a href="" class="btn btn-outline-danger">Eliminar</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                <?php endforeach?>
+            </div>
+        
         </div>
+    
     
     </main>
 
 
+    
+    
+
+    <script src="https://kit.fontawesome.com/7b642ec699.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>
