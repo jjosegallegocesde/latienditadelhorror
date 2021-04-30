@@ -57,6 +57,47 @@
             //5. Retornar la información solicitada
             return($operacion->fetchAll());
         }
+
+        public function eliminarRegistros($consultaSQL){
+
+            //1. Conectarme a la base datos
+            $conexion=$this->conectarBD();
+
+            //2. Decirle a la BD que se prepare porque le voy a enviar una consulta SQL
+            $operacion=$conexion->prepare($consultaSQL);
+
+            //3. Ejecutar la consulta
+            $resultado=$operacion->execute();
+
+            //4. Verificar el estado de la variable resultado
+            if($resultado){
+                echo("exito eliminando los datos a la BD");
+            }else{
+                print_r($operacion->errorInfo());
+            }   
+
+        }
+
+        public function editarRegistros($consultaSQL){
+
+            //1. Conectarme a la base datos
+            $conexion=$this->conectarBD();
+
+            //2. Decirle a la BD que se prepare porque le voy a enviar una consulta SQL
+            $operacion=$conexion->prepare($consultaSQL);
+
+            //3. Ejecutar la consulta
+            $resultado=$operacion->execute();
+
+            //4. Verificar el estado de la variable resultado
+            if($resultado){
+                echo("exito editando los datos a la BD");
+            }else{
+                print_r($operacion->errorInfo());
+            }   
+
+        }
+
         
     }
 

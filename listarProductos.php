@@ -83,7 +83,6 @@
             
             <div class="row row-cols-1 row-cols-md-4 g-4 mt-5">
                 <?php foreach($productos as $producto):?>
-                    
                     <div class="col">
                         <div class="card h-100">
                             <img src="<?= $producto["url_foto"] ?>" class="card-img-top" alt="imagen">
@@ -91,12 +90,90 @@
                                 <h5 class="card-title"><?= $producto["nombre"] ?>-<?=$producto["marca"]?></h5>
                                 <p><?= $producto["descripcion"]?></p>
                                 <p class="text-danger fw-bold">$<?= $producto["precio"]?></p>
-                                <a href="" class="btn btn-outline-danger">Eliminar</a>
-
+                                <a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#mensaje<?=$producto["id"]?>">Eliminar</a>
+                                <a href="" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editar<?=$producto["id"]?>">Editar</a>
                             </div>
                         </div>
-                    </div>
 
+                        <section>
+                            <div class="modal fade" id="mensaje<?=$producto["id"]?>" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header bg-danger text-white">
+                                            <h5 class="modal-title">Eliminar Producto</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-4 text-center">
+                                                    <img src="<?=$producto["url_foto"]?>" alt="imagenProducto" class="img-fluid">
+                                                    <h5><?= $producto["nombre"] ?></h5>
+                                                    <h6>$<?= $producto["precio"] ?></h6>
+                                                </div>
+                                                <div class="col-8 text-start align-self-center">
+                                                    <p>¿Está seguro de eliminar de la BD este producto?</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                                            <a href="servidor/eliminarDatos.php?id=<?php echo($producto["id"])?>" type="button" class="btn btn-danger">Aceptar</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <div class="modal fade" id="editar<?=$producto["id"]?>" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header bg-warning text-white">
+                                            <h5 class="modal-title">Editar Producto</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-4 text-center align-self-center">
+                                                    <img src="<?=$producto["url_foto"]?>" alt="imagenProducto" class="img-fluid">
+                                                </div>
+                                                <div class="col-8 text-start align-self-center">
+                                                    <form action="servidor/editarDatos.php?id=<?=$producto["id"]?>" method="POST">
+                                                        <div class="mb-3">
+                                                            <label  class="form-label">Nombre</label>
+                                                            <input type="text" class="form-control" value="<?=$producto["nombre"]?>" name="nombreEditar">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label  class="form-label">Precio</label>
+                                                            <input type="number" class="form-control" value="<?=$producto["precio"]?>" name="precioEditar">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label  class="form-label">Foto URL</label>
+                                                            <input type="text" class="form-control" value="<?=$producto["url_foto"]?>" name="fotoEditar">
+                                                        </div>
+                                                        <div class="d-grid gap-2">
+                                                            <button class="btn btn-warning" type="submit" name="botonEditar">Aceptar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        
+
+
+
+                    </div>
                 <?php endforeach?>
             </div>
         
