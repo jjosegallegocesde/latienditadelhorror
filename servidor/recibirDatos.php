@@ -21,7 +21,7 @@
         $consultaSQL="INSERT INTO productos(nombre,precio,marca,url_foto,descripcion) VALUES ('$nombreProducto','$precioProducto','$marcaProducto','$fotoProducto','$descripcionProducto')";
         
         //4. Llamar al metodo de la clase BaseDatos para AGREGAR rgeistros
-        $operacionBD->agregarRegistros($consultaSQL);
+        $operacionBD->escribirRegistros($consultaSQL,"insert");
 
 
     }else{

@@ -14,7 +14,7 @@ $operacionBD= new Basedatos();
 $consultaSQL="DELETE FROM productos WHERE id='$id'";
 
 //4. Ejecuto el metodo para elimianr un registro
-$operacionBD->eliminarRegistros($consultaSQL);
+$operacionBD->escribirRegistros($consultaSQL,"delete");
 
 
 

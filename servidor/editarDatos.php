@@ -21,7 +21,7 @@ if(isset($_POST["botonEditar"])){
     $consultaSQL="UPDATE productos SET nombre='$nombreProducto',precio='$precioProducto',url_foto='$fotoProducto' WHERE id='$id'";
 
     //5. LLamar el metodo editarregistros
-    $operacionBD->editarRegistros($consultaSQL);
+    $operacionBD->escribirRegistros($consultaSQL,"update");
    
 
 }

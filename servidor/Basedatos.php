@@ -1,10 +1,17 @@
-<?php 
+<?php
+
+    if(!isset($_SESSION)){
+        session_start();
+    }
+
 
     class Basedatos{
 
         //ATRIBUTOS
         public $usuarioBD="root";
         public $passwordBD="";
+        public $servidorBD="mysql:host=localhost;";
+        public $nombreBD="dbname=tiendasarmonia";
 
         //CONSTRUCTOR
         public function __construct(){}
@@ -12,31 +19,32 @@
         //METODOS
         public function conectarBD(){
             try{
-                $datosGeneralesBD="mysql:host=localhost;dbname=tiendasarmonia";
+                $datosGeneralesBD=$this->servidorBD.$this->nombreBD;
                 $conexion= new PDO($datosGeneralesBD,$this->usuarioBD,$this->passwordBD);
                 return($conexion);
             }catch(PDOException $mensajeError){
-                echo($mensajeError->getMessage());
+                header("Location:../error.php");
             }   
         }
 
-        public function agregarRegistros($consultaSQL){
+        public function escribirRegistros($consultaSQL,$tipoConsulta){
 
             //1. Conectarme a la base datos
             $conexion=$this->conectarBD();
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            //2. Decirle a la BD que se prepare porque le voy a enviar una consulta SQL
-            $operacion=$conexion->prepare($consultaSQL);
+            try{
+                //2. Decirle a la BD que se prepare porque le voy a enviar una consulta SQL
+                $operacion=$conexion->prepare($consultaSQL);
+                //3. Ejecutar la consulta
+                $resultado=$operacion->execute();
+                //4. Clasificar la consulta
+                $this->clasificarConsulta($tipoConsulta);
 
-            //3. Ejecutar la consulta
-            $resultado=$operacion->execute();
+            }catch(PDOException $mensajeError){
+                header("Location:../error.php");
+            }
 
-            //4. Verificar el estado de la variable resultado
-            if($resultado){
-                echo("exito agregando los datos a la BD");
-            }else{
-                print_r($operacion->errorInfo());
-            }   
         }
 
         public function buscarRegistros($consultaSQL){
@@ -58,49 +66,24 @@
             return($operacion->fetchAll());
         }
 
-        public function eliminarRegistros($consultaSQL){
+        public function clasificarConsulta($tipoConsulta){ 
 
-            //1. Conectarme a la base datos
-            $conexion=$this->conectarBD();
-
-            //2. Decirle a la BD que se prepare porque le voy a enviar una consulta SQL
-            $operacion=$conexion->prepare($consultaSQL);
-
-            //3. Ejecutar la consulta
-            $resultado=$operacion->execute();
-
-            //4. Verificar el estado de la variable resultado
-            if($resultado){
-                echo("exito eliminando los datos a la BD");
-            }else{
-                print_r($operacion->errorInfo());
-            }   
-
+            switch ($tipoConsulta) {
+                case 'insert':
+                    $_SESSION["mensaje"]="exito agregando registros";
+                    header("Location:../registrarProductos.php");
+                break;
+                case 'delete':
+                    $_SESSION["mensaje"]="exito eliminando producto";
+                    header("Location:../listarProductos.php");
+                break;
+                case 'update':
+                    $_SESSION["mensaje"]="exito editando el producto";
+                    header("Location:../listarProductos.php");
+                break;      
+            }
         }
 
-        public function editarRegistros($consultaSQL){
-
-            //1. Conectarme a la base datos
-            $conexion=$this->conectarBD();
-
-            //2. Decirle a la BD que se prepare porque le voy a enviar una consulta SQL
-            $operacion=$conexion->prepare($consultaSQL);
-
-            //3. Ejecutar la consulta
-            $resultado=$operacion->execute();
-
-            //4. Verificar el estado de la variable resultado
-            if($resultado){
-                echo("exito editando los datos a la BD");
-            }else{
-                print_r($operacion->errorInfo());
-            }   
-
-        }
-
-        
     }
-
-
 
 ?>
