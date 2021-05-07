@@ -2,6 +2,7 @@
 
 //0. INCLUIR EL ARCHIVO DONDE ESTA PROGRAMADA NUESTRA CLASE BASEDATOS
 include("Basedatos.php");
+include("../models/Productos.php");
 
 //1. Recibir el dato del ID a eliminar
 $id=$_GET["id"];
@@ -11,7 +12,8 @@ $id=$_GET["id"];
 $operacionBD= new Basedatos();
 
 //3.Crear la consulta SQL para ELIMINAR REGISTROS
-$consultaSQL="DELETE FROM productos WHERE id='$id'";
+$modeloProductos=new Productos();
+$consultaSQL=$modeloProductos->eliminarProducto($id);
 
 //4. Ejecuto el metodo para elimianr un registro
 $operacionBD->escribirRegistros($consultaSQL,"delete");

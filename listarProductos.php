@@ -14,28 +14,38 @@
         if(!isset($_SESSION)){
             session_start();
         }
-
-        //0. INCLUIR EL ARCHIVO DONDE ESTA PROGRAMADA NUESTRA CLASE BASEDATOS
-        include("servidor/Basedatos.php");
-
-        //1. Crear una copia (crear un objeto) de la clase BD
-        $operacionBD= new Basedatos();
-
-        //2. consulta SQL para seleccionar
-        $consultaSQL="SELECT * FROM productos";
-
-        //3. accedemos al metodo buscarRegistros y almacenamos la consulta dentro de un arrgelo
-        $productos=$operacionBD->buscarRegistros($consultaSQL);
-
-        //4. imprimir el arreglo
-        /*print_r($productos);
-        $productos[0];*/
+        include("servidor/buscarDatos.php");
        
     
     ?>
 
+    
+
     <?php if(isset($_SESSION["mensaje"])):?>
-        <h2 class="text-white"><?=$_SESSION["mensaje"]?></h2>
+        
+        <section>
+            <div class="modal fade" id="ventanaMensaje" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title">Reporte</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <p><?=$_SESSION["mensaje"]?></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script type="module" src="scripts/lanzarModal.js"></script>
+
+       <?php unset($_SESSION["mensaje"])?>
+        
     <?php endif?>
 
 
@@ -177,10 +187,6 @@
                                 </div>
                             </div>
                         </section>
-
-                        
-
-
 
                     </div>
                 <?php endforeach?>
