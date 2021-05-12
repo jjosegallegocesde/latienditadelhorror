@@ -6,7 +6,7 @@ if(!isset($_SESSION)){
 
 //0. INCLUIR EL ARCHIVO DONDE ESTA PROGRAMADA NUESTRA CLASE BASEDATOS
 include("Basedatos.php");
-include("models/Productos.php");
+include("../models/Productos.php");
 
 //1. Crear una copia (crear un objeto) de la clase BD
 $operacionBD= new Basedatos();
@@ -14,19 +14,10 @@ $operacionBD= new Basedatos();
 //2. consulta SQL para seleccionar
 $modeloProductos= new Productos(); 
 $consultaSQL=$modeloProductos->buscarProductos();
-//$consultaSQL="SELECT * FROM productos";
+$consultaSQL="SELECT * FROM productos";
 
 //3. accedemos al metodo buscarRegistros y almacenamos la consulta dentro de un arrgelo
 $productos=$operacionBD->buscarRegistros($consultaSQL);
-
-
-
-//4. imprimir el arreglo
-/*print_r($productos);
-$productos[0];*/
-
-
-
 
 
 ?>

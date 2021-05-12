@@ -7,16 +7,15 @@
     <title>Tiendita del horror</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 </head>
-<body class="bg-dark text-white">
+<body class="bg-dark">
 
     <?php 
 
         if(!isset($_SESSION)){
             session_start();
         }
-        include("servidor/buscarDatos.php");
+        include("../servidor/buscarDatos.php");
        
-    
     ?>
 
     
@@ -42,7 +41,7 @@
             </div>
         </section>
 
-        <script type="module" src="scripts/lanzarModal.js"></script>
+        <script type="module" src="../public/scripts/lanzarModal.js"></script>
 
        <?php unset($_SESSION["mensaje"])?>
         
@@ -52,7 +51,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-            <img src="img/vegetables.png" alt="logo" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="../public/img/vegetables.png" alt="logo" width="30" height="24" class="d-inline-block align-text-top">
                 La Tiendita
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -60,7 +59,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="registrarProductos.php">Registrar Productos</a>
@@ -113,6 +112,7 @@
                                 <a href="" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editar<?=$producto["id"]?>">Editar</a>
                             </div>
                         </div>
+                        <!-- -->
 
                         <section>
                             <div class="modal fade" id="mensaje<?=$producto["id"]?>" tabindex="-1">
@@ -139,7 +139,7 @@
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                                            <a href="servidor/eliminarDatos.php?id=<?php echo($producto["id"])?>" type="button" class="btn btn-danger">Aceptar</a>
+                                            <a href="../servidor/eliminarDatos.php?id=<?php echo($producto["id"])?>" type="button" class="btn btn-danger">Aceptar</a>
                                         </div>
 
                                     </div>
@@ -163,7 +163,7 @@
                                                     <img src="<?=$producto["url_foto"]?>" alt="imagenProducto" class="img-fluid">
                                                 </div>
                                                 <div class="col-8 text-start align-self-center">
-                                                    <form action="servidor/editarDatos.php?id=<?=$producto["id"]?>" method="POST">
+                                                    <form action="../servidor/editarDatos.php?id=<?=$producto["id"]?>" method="POST">
                                                         <div class="mb-3">
                                                             <label  class="form-label">Nombre</label>
                                                             <input type="text" class="form-control" value="<?=$producto["nombre"]?>" name="nombreEditar">
@@ -197,9 +197,6 @@
     
     </main>
 
-
-    
-    
 
     <script src="https://kit.fontawesome.com/7b642ec699.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

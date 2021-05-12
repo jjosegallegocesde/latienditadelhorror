@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpotyAPP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/estilos.css">
+    <link rel="stylesheet" href="public/styles/estilos.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">
 </head>
@@ -16,7 +16,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="menu">
         <div class="container-fluid text-white">
 
-          <img src="img/vegetables.png" alt="logo" width="30" height="24" class="d-inline-block align-text-top px-1">
+          <img src="public/img/vegetables.png" alt="logo" width="30" height="24" class="d-inline-block align-text-top px-1">
             La Tiendita
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,11 +31,11 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="registrarProductos.php">Registrar Productos</a>
+                <a class="nav-link" href="views/registrarProductos.php">Registrar Productos</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="listarProductos.php">Listar Productos</a>
+                <a class="nav-link" href="views/listarProductos.php">Listar Productos</a>
               </li>
 
               <li class="nav-item dropdown">
@@ -180,7 +180,7 @@
         <div class="row d-flex justify-content-center">
           <div class="col-12 col-md-8">
             <h2 class="text-center text-muted">Conoce más de nuestra política verde</h2>
-            <img src="img/banner2.png" alt="banner" class="img-fluid mx-auto d-block">
+            <img src="public/img/banner2.png" alt="banner" class="img-fluid mx-auto d-block">
           </div>
         </div>
       </div>

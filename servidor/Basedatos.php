@@ -23,7 +23,7 @@
                 $conexion= new PDO($datosGeneralesBD,$this->usuarioBD,$this->passwordBD);
                 return($conexion);
             }catch(PDOException $mensajeError){
-                header("Location:../error.php");
+                header("Location:../views/error.php");
             }   
         }
 
@@ -71,15 +71,15 @@
             switch ($tipoConsulta) {
                 case 'insert':
                     $_SESSION["mensaje"]="exito agregando registros";
-                    header("Location:../registrarProductos.php");
+                    header("Location:../views/registrarProductos.php");
                 break;
                 case 'delete':
                     $_SESSION["mensaje"]="exito eliminando producto";
-                    header("Location:../listarProductos.php");
+                    header("Location:../views/listarProductos.php");
                 break;
                 case 'update':
                     $_SESSION["mensaje"]="exito editando el producto";
-                    header("Location:../listarProductos.php");
+                    header("Location:../views/listarProductos.php");
                 break;      
             }
         }
